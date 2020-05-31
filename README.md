@@ -1,6 +1,6 @@
 # RGBGuessingGame
 >A Mini-game devloped with an objective of finding the colour matching to the random RGB values generated.
-<img src="images/pro.png" width=400>
+<img src="image/game.JPG" width=300>
 
 ---
 
@@ -12,7 +12,7 @@
 
 ---
 ## Play
-http://Gursimar04.github.com/RGBGuessingGame
+[Click to Play The Game](https://gursimar04.github.io/RGBGuessingGame/)
 
 ## Description
 Every programmer frequently uses RGB values to add colours to their prjects, but heavily depend on colour pickers. This mini-game put's ones RGB abilities to the test by challenging them at two difficulty levels and asking them to select the correct color in accordance with the RGB value. 
@@ -22,11 +22,6 @@ Every programmer frequently uses RGB values to add colours to their prjects, but
 - HTML5
 - CSS
 - JavaScript
-
-<img src="images/findtrain.png" width=400>
-
-<img src="images/gui.png" width=400>
-
 ---
 ## License
 MIT License

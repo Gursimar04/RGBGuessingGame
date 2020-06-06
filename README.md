@@ -1,6 +1,6 @@
 # RGBGuessingGame
 >A Mini-game devloped with an objective of finding the colour matching to the random RGB values generated.
-<img src="image/game.JPG" width=300>
+<img src="image/gamepic.JPG" width=350>
 
 ---
 

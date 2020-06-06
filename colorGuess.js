@@ -9,6 +9,8 @@ var sc= document.querySelector("#sc")
 var liv= document.querySelector("#liv")
 var game=document.querySelector("#plays")
 
+var ans=0;
+
 var practice=0
 var score=0
 var life=6
@@ -25,32 +27,27 @@ function init(){
 	redo()
 }
 
-game.addEventListener("click",function(){
-	this.style.display="none"
-	score=0,life=6
-	sc.textContent="Score: "+ score
-	liv.textContent="Lives: "+life
-	liv.style.color="steelblue"
-
-	if(this.textContent === "Extreme")
-						extremelevel()
-					else
-						redo()
-})
-
 pr.addEventListener("click",function(){
-	this.classList.toggle("levelSelect")
-	score=0,life=6
-	if(!this.classList.contains("levelSelect")){
-		practice=1
-		sc.textContent="Score: "+ score
-		liv.textContent="Lives: "+life
-	}
-	else{
-		practice=0
-		sc.textContent=""
-		liv.textContent=""
-	}
+	if(practice===0 || life!==0){
+		sc.style.color="steelblue"
+		liv.style.color="steelblue"
+		this.classList.toggle("levelSelect")
+		score=0,life=6
+		if(!this.classList.contains("levelSelect")){
+			practice=1
+			sc.textContent="Score: "+ score
+			liv.textContent="Lives: "+life
+		}
+		else{
+			practice=0
+			sc.textContent=""
+			liv.textContent=""
+		}
+		if(modeButton[2].classList.contains("levelSelect"))
+				extremelevel()
+			else	
+				redo()
+	}	
 })
 
 function setUpSquares(){
@@ -63,7 +60,8 @@ function setUpSquares(){
 					var clickedCol= this.style.backgroundColor;
 					if(clickedCol===picked)
 					{
-						if(!pr.classList.contains("levelSelect")){
+						if(!pr.classList.contains("levelSelect")&&ans==0){
+							ans=1;
 							score++;
 							sc.textContent="Score: "+ score
 						}
@@ -78,9 +76,12 @@ function setUpSquares(){
 						if(!pr.classList.contains("levelSelect")){
 							life--;
 							liv.textContent="Lives: "+life
-							if(life==0){
+							if(life==0&&practice==1){
 								liv.style.color="red"
-								game.style.display="inline"
+								sc.style.color="green"
+								replay.classList.add("re")
+								replay.textContent="Reset"
+
 							}
 						}
 						this.style.backgroundColor= "#232323";
@@ -96,11 +97,18 @@ function setUpModes(){
 
 		for(var i=0; i< modeButton.length; i++){
 			modeButton[i].addEventListener("click",function(){
+
 				if(practice===0 || life!=0)
 				{
+					if(practice==1){
+						life=6;score=0;
+					liv.textContent="Lives:"+life
+					sc.textContent="Score:"+score
+					}
 					modeButton[0].classList.remove("levelSelect");
 					modeButton[1].classList.remove("levelSelect");
 					modeButton[2].classList.remove("levelSelect");
+					
 					this.classList.add("levelSelect");
 					numSq=(this.textContent === "Easy")? 3 : 6
 					
@@ -118,6 +126,7 @@ function redo()
 {
 	if(practice===0 || life!=0)
 	{
+		ans=0;
 		h.style.backgroundColor="steelblue"
 		message.textContent=""
 		colorList=generateColors(numSq)
@@ -142,13 +151,21 @@ function redo()
 
 replay.addEventListener("click",function(){
 
-	if(practice===0 || life!=0)
+	if(practice===1 && life===0)
 	{
-		if(modeButton[2].classList.contains("levelSelect"))
-			extremelevel()
-		else	
-			redo()
+
+		this.classList.remove("re")
+		score=0,life=6
+		sc.textContent="Score: "+ score
+		liv.textContent="Lives: "+life
+		liv.style.color="steelblue"
+		sc.style.color="steelblue"
 	}
+
+	if(modeButton[2].classList.contains("levelSelect"))
+		extremelevel()
+	else	
+		redo()
 })
 
 
@@ -184,6 +201,7 @@ function randomColors() {
 
 
 function extremelevel(){
+	ans=0;
 	if(practice===0 || life!=0)
 	{
 		h.style.backgroundColor="steelblue"

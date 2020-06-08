@@ -114,8 +114,9 @@ function setUpModes(){
 					
 					if(this.textContent === "Extreme")
 						extremelevel()
-					else
-						redo()
+					else{
+						 	redo()
+					}
 				}
 			})
 		}
@@ -149,7 +150,11 @@ function redo()
 
 }
 
-replay.addEventListener("click",function(){
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+replay.addEventListener("click",async function(){
 
 	if(practice===1 && life===0)
 	{
@@ -162,12 +167,33 @@ replay.addEventListener("click",function(){
 		sc.style.color="steelblue"
 	}
 
+	animatingSq()
+	await sleep(550)
+	animatingSq()
+	await sleep(550)
+	animatingSq()
+	await sleep(550)
+
 	if(modeButton[2].classList.contains("levelSelect"))
 		extremelevel()
-	else	
-		redo()
+	else{	
+			redo()
+	}
 })
+function animatingSq(){
+	colorList=generateColors(numSq)
+	for(var i=0;i<squares.length;i++)
+		{
+			if(colorList[i]){
+				squares[i].style.display="block"
+				squares[i].style.backgroundColor=colorList[i]
+			}
+			else{
+				squares[i].style.display="none"
+			}
+		}
 
+}
 
 function answerFound(color){
 	for(var i=0;i<squares.length;i++)
